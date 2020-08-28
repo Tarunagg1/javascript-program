@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #f6f6f6;
+}
+.countdowncontainer{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    text-align: center;
+    background: #ddd;
+    border: 1px solid #999;
+    padding: 10px;
+    box-shadow: 0 0 5px 3px #ccc;
+}
+.info{
+    font-size: 100px;
+}
+</style>
+<body>
+    <table class="countdowncontainer">
+        <tr>
+            <td colspan="4" class="infp">2020 Gone CountDown</td>
+        </tr>
+        <tr class="info">
+            <td id="days">120:</td>
+            <td id="hours">4:</td>
+            <td id="minutes">12:</td>
+            <td id="seconsds">22</td>
+        </tr>
+        <tr>
+            <td>Days</td>
+            <td>Hours</td>
+            <td>Minutes</td>
+            <td>Seconds</td>
+        </tr>
+    </table>
+</body>
+<script>
+function countdown(){
+    var now = new Date();
+    var event_date = new Date(2021,0,01)    
+    var currenttime = now.getTime();
+    var evnttime = event_date.getTime();
+    var realtime = evnttime-currenttime;
+
+    var s = Math.floor(realtime/1000)
+    var m = Math.floor(s / 60)
+    var h = Math.floor(m / 60)
+    var d = Math.floor(h/24)
+    h  %= 24;
+    m %= 60;
+    s %= 60;
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+
+    document.getElementById("days").textContent = d;
+    document.getElementById("days").innerText = d + ":";
+    document.getElementById("hours").innerText = h + ":";
+    document.getElementById("minutes").innerText = m +":";
+    document.getElementById("seconsds").innerText = s;
+}
+setInterval(() => {
+    countdown();
+
+}, 1000);
+</script>
+</html>

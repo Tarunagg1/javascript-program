@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 300px;
+            overflow: hidden;
+            margin: 50px auto 0 auto;
+        }
+
+        .container .box {
+            float: left;
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+            transition: all .25s ease-in-out;
+            font-family: sans-serif;
+            font-size: 85px;
+            text-align: center;
+            line-height: 100px;
+            cursor: pointer;
+        }
+
+        .container .box:hover {
+            background: rgba(10, 10, 10, 0.5);
+            color: #fff;
+        }
+
+        .playagain {
+            background: #26c281;
+            color: #fff;
+            font-weight: bold;
+            border: 1px solid yellow;
+            cursor: pointer;
+            width: 160px;
+            height: 40px;
+            font-size: 20px;
+            display: block;
+            margin: 15px auto;
+        }
+
+        .container span {
+            width: 100%;
+            display: block;
+            text-align: center;
+            font-size: 40px;
+            margin: 10px;
+            font-family: sans-serif;
+            color: #fff;
+            background: #446cB3;
+        }
+
+        .win {
+            background: #F9690E;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <span id="turn-board">Turn is X :</span>
+        <div class="box" id="box1">1</div>
+        <div class="box" id="box2">2</div>
+        <div class="box" id="box3">3</div>
+        <div class="box" id="box4">4</div>
+        <div class="box" id="box5">5</div>
+        <div class="box" id="box6">6</div>
+        <div class="box" id="box7">7</div>
+        <div class="box" id="box8">8</div>
+        <div class="box" id="box9">9</div>
+    </div>
+    <button id="agian" onClick="replay()" class="playagain">Play Again</button>
+</body>
+<script>
+    board = document.getElementById("turn-board");
+
+    function selectwinner(b1, b2, b3) {
+        b1.classList.add('win')
+        b2.classList.add('win')
+        b3.classList.add('win')
+        board.innerHTML = b1.innerHTML + " Won Congo!!!";
+
+    }
+
+    function getwinner() {
+        var box1 = document.getElementById("box1");
+        var box2 = document.getElementById("box2");
+        var box3 = document.getElementById("box3");
+        var box4 = document.getElementById("box4");
+        var box5 = document.getElementById("box5");
+        var box6 = document.getElementById("box6");
+        var box7 = document.getElementById("box7");
+        var box8 = document.getElementById("box8");
+        var box9 = document.getElementById("box9");
+
+        if (box1.innerHTML !== "" && box1.innerHTML === box2.innerHTML && box1.innerHTML === box3.innerHTML)
+            selectwinner(box1, box2, box3)
+
+        else if (box4.innerHTML !== "" && box4.innerHTML === box5.innerHTML && box4.innerHTML === box6.innerHTML)
+            selectwinner(box4, box5, box6)
+
+        else if (box7.innerHTML !== "" && box7.innerHTML === box8.innerHTML && box7.innerHTML === box9.innerHTML)
+            selectwinner(box7, box8, box9)
+
+
+        else if (box1.innerHTML !== "" && box1.innerHTML === box4.innerHTML && box1.innerHTML === box7.innerHTML)
+            selectwinner(box1, box4, box7)
+
+        else if (box2.innerHTML !== "" && box2.innerHTML === box5.innerHTML && box2.innerHTML === box8.innerHTML)
+            selectwinner(box2, box5, box8)
+
+
+        else if (box3.innerHTML !== "" && box3.innerHTML === box6.innerHTML && box3.innerHTML === box9.innerHTML)
+            selectwinner(box3, box6, box9)
+
+
+        else if (box1.innerHTML !== "" && box1.innerHTML === box5.innerHTML && box1.innerHTML === box9.innerHTML)
+            selectwinner(box1, box5, box9)
+
+
+        else if (box3.innerHTML !== "" && box3.innerHTML === box5.innerHTML && box3.innerHTML === box7.innerHTML)
+            selectwinner(box3, box5, box7)
+    }
+
+    var boxes = document.querySelectorAll("#main div"), X_or_0 = 0;
+    for (var i = 0; i < boxes.length; i++) {
+        boxes[i].onclick = function () {
+            if (this.innerHTML === "X" || this.innerHTML === "O") {
+                alert("invalid move")
+            } else {
+                if (X_or_0 % 2 === 0) {
+                    board.innerHTML = "Turn Is: O"
+                    this.innerHTML = "X";
+                    getwinner();
+                    X_or_0 += 1;
+                } else {
+                    board.innerHTML = "Turn Is: X"
+                    this.innerHTML = "O";
+                    getwinner();
+                    X_or_0 += 1;
+                }
+            }
+        }
+    }
+
+    function replay() {
+        for (var i = 0; i < boxes.length; i++) {
+            boxes[i].classList.remove("win")
+            boxes[i].innerHTML = i + 1;
+        }
+    }
+</script>
+
+</html>

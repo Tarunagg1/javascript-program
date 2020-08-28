@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timecircles/1.5.3/TimeCircles.min.css"
+        integrity="sha512-lZ3AwSh5B+1EgCuXvjkdhFX8xU4dMDO8SPqAn71VFY4luNN8gwKpajLxaZRMSeNMghUghfodtkZAWO2rM7H6Qw=="
+        crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/timecircles/1.5.3/TimeCircles.min.js"
+        integrity="sha512-FofOhk0jW4BYQ6CFM9iJutqL2qLk6hjZ9YrS2/OnkqkD5V4HFnhTNIFSAhzP3x//AD5OzVMO8dayImv06fq0jA=="
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>TimeCircle examples</h1>
+        <h2>Time until 2014</h2>
+        <div id="DateCountdown" data-date="2014-01-01 00:00:00"
+            style="width: 500px; height: 125px; padding: 0px; box-sizing: border-box; background-color: #E0E8EF"></div>
+        <div style="padding: 10px;">
+            <input type="date" id="date" value="2014-01-01">
+            <input type="time" id="time" value="00:00">
+        </div>
+        <hr>
+        <h2>Counting down 15 minutes (900 seconds)</h2>
+        <div id="CountDownTimer" data-timer="6000" style="width: 1000px; height: 250px;"></div>
+
+        <hr>
+        <h2>Time since page was opened</h2>
+        <div>
+            <div id="PageOpenTimer" style="width: 500px; height: 125px; float: left"></div>
+        </div>
+    </div>
+    <script>
+        $("#DateCountdown").TimeCircles();
+        $("#CountDownTimer").TimeCircles({ time: { Days: { show: false }, Hours: { show: true } } });
+        $("#PageOpenTimer").TimeCircles();
+
+        var updateTime = function () {
+            var date = $("#date").val();
+            var time = $("#time").val();
+            var datetime = date + ' ' + time + ':00';
+            $("#DateCountdown").data('date', datetime).TimeCircles().start();
+        }
+        $("#date").change(updateTime).keyup(updateTime);
+        $("#time").change(updateTime).keyup(updateTime);
+
+    </script>
+</body>
+
+</html>

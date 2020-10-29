@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        .maindiv{
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            background: #3498db;
+        }
+        .centerdiv{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            text-align: center;
+        }
+        h1{
+            text-transform: capitalize;
+            margin-bottom: 30px;
+            color: #ecf0f1;
+            font-size: 2.1rem;
+            text-shadow: 1px 2px 3px #292929;
+        }
+        textarea{
+            background-color: #444;
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+            border: 10px solid #34495e;
+            color: white;
+            font-size: 1.3rem;
+        }
+        .mainbtn{
+            padding: 10px 20px;
+            border-radius: 20px;
+            outline: none;
+            border: 5px solid #2980b9;
+            background: #ecf0f1;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="maindiv">
+        <div class="centerdiv">
+            <h1>Welcome to typing speed test</h1>
+            <h2 id="msg"></h2>
+            <textarea name="" id="myword" cols="140" rows="20" placeholder="enter the your words" disabled></textarea>
+            <br>
+            <button class="mainbtn" id="start">Start</button>
+        </div>
+    </div>
+</body>
+<script>
+    const softword = ["PHP is a general-purpose scripting language that is especially suited to web development. It was originally created by Danish-Canadian programmer",
+    "C++ is a programming language developed by Bjarne Stroustrup in 1979 at Bell Labs. C++ is regarded as a middle-level language",
+    "Node. js is primarily used for non-blocking, event-driven servers, due to its single-threaded nature. It's used for traditional web sites and back-end API services"];
+    let starttime,endtime;
+    let isplay = 0;
+    playgame = () =>{
+        isplay = 1;
+        let random = Math.floor(Math.random()*softword.length);
+        msg.innerText = softword[random]
+        let date = new Date();
+        starttime = date.getTime();
+        start.innerText = "Done";
+    }
+
+    const endplay = ()=>{
+        let date = new Date();
+        endtime = date.getTime();
+        let totaltime = ((endtime - starttime) / 1000);
+        let totalword = myword.value;
+        let wordcount = wordcounter(totalword);
+        let speed = Math.round((wordcount/totaltime) * 60);
+        finalmsg = `toy typed total as ${speed} word per minute`;
+        finalmsg += compareword(msg.innerText,totalword);
+        msg.innerText = finalmsg
+    }
+
+    const wordcounter = (str) => {
+        w = str.split(" ").length;
+        return w;
+    }
+    
+    const compareword = (msg,getval)=>{
+        let display = msg.split(" ");
+        let getv = getval.split(" ");
+        let count =0;
+        display.forEach(function(item,index){
+            if(item == getv[index]){
+                count++;
+            }
+        })
+        let errorword = (display.length - count);
+        return (`${count} correct out of ${display.length} words of the total number of error word ${errorword}`);
+    }
+
+    start.addEventListener('click',(evt)=>{
+        if(!isplay){
+            myword.disabled = false;
+            playgame();
+        }
+        else{
+            myword.disabled = true;
+            start.innerText = "Start";
+            endplay();
+        }
+    })
+
+</script>
+</html>

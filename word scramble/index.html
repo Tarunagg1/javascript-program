@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Catamaran&family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            width: 100%;
+            line-height: 14vh;
+            background-color: #20bf6b;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 1.8em;
+            letter-spacing: 15px;
+            text-shadow: 0 1px 0 #efefef,0 2px 0 #efefef,0 3px 0 #efefef,0 4px 0 #efefef,0 30px 5px rgba(0, 0, 0, .1);
+            font-family: 'Catamaran', sans-serif;
+        }
+        section{
+            height: 86vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #7bed9f;
+        }
+        .gamearea{
+            width: 50%;
+            height: 400px;
+            padding: 20px 0;
+            background-color: #2ed573;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            font-family: 'Source Sans Pro', sans-serif;
+            align-items: center;
+            box-shadow: 0 8px 6px -6px black;
+        }
+        h3{
+            text-align: center;
+            font-size: 1.5em;
+        }
+        input{
+            width: 40%;
+            padding: 15px 0;
+            text-align: center;
+            outline: none;
+            border-radius: 25px;
+            border: none;
+            background-color: #dff9fb;
+            color: black;
+            margin: 2rem 0;
+            font-size: 1.1rem;
+        }
+        button{
+            font-size: 1rem;
+            cursor: pointer;
+            outline: none;
+            border: #2f3542;
+            margin-top: 10px;
+            color: #eb4d4b;
+        }   
+        .hidden{
+            display: none;
+        }
+        button.btn{
+                font-weight: 600;
+                padding: 1rem 2rem;
+                background: white;
+                text-transform: uppercase;
+                transition-property: all;
+                transition-duration: 0.5s;
+                transition-timing-function: cubic-bezier(0.65, -0.25, 0.25, 1.95);
+        }
+        button.btn:hover,button.btn:focus,button.btn:active{
+            letter-spacing: 0.125rem;
+            word-spacing: 0.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Guess the word game</h1>
+    </header>
+    <section>
+        <div class="gamearea">
+            <h3 id="msg" class="msg"></h3>
+            <input id="guess" class="hidden" type="text">
+            <button id="btn" class="btn">Start Game</button>
+        </div>
+    </section>
+</body>
+<script src="index.js"></script>
+</html>

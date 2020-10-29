@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="inner">
+            <div class="box">
+                <p class="number">
+                    <img src="twiter.png" alt="not found" text="tweet me" id="tweet">
+                </p>
+                <div class="text">
+                    <i class="start-quote fas fa-quote-left"></i>
+                    <p class="quotes" id="quotes"></p>
+                    <p id="author"></p>
+                </div>
+                <label  class="button">
+                    <p id="newquotes">New Quotes</p>
+                </label>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    const api = "https://type.fit/api/quotes"
+    realdata = "";
+    quotedata = "";
+
+    const tweetnow = () => {
+        let tweetpost = `https://twitter.com/intent/tweeet?text=${quotedata.text}`;
+        window.open(tweetpost);
+    }
+    const getnewQuotes = () => {
+        let random = Math.floor(Math.random() * realdata.length - 1);
+        quotedata = realdata[random];
+        quotes.innerText = `${realdata[random].text}`;
+        let qaut = realdata[random].author;
+        qaut == null ? (author.innerText = `Unknown`)
+            : (author.innerText = `${qaut}`);
+    }
+    const getQuotes = async () => {
+        try {
+            let data = await fetch(api)
+            realdata = await data.json();
+            getnewQuotes();
+        } catch (error) {
+            console.log("erreo accure");
+        }
+    }
+    getQuotes();
+    tweet.addEventListener('click', tweetnow)
+    newquotes.addEventListener('click', getQuotes)
+</script>
+
+</html>

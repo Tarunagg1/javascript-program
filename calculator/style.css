@@ -1,0 +1,25 @@
+.formstyle{
+    width: 350px;
+    height: 400px;
+    margin: auto;
+    margin-top: 100px;
+    border: 1px dotted black;
+}
+p{
+    margin: 10px;
+    margin-left: 20%;
+}
+#clear{
+    width: 90%;
+}
+.form{
+    margin-left: 10px;
+}
+#input{
+    width: 90%;
+}
+input[type=button]{
+    width: 26%;
+    margin: 10px;
+    padding: 5px;
+}
